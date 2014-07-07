@@ -203,3 +203,12 @@ target_link_libraries( test_point_cloud opengv random_generators )
 
 add_Executable( test_point_cloud_sac test/test_point_cloud_sac.cpp )
 target_link_libraries( test_point_cloud_sac opengv random_generators )
+
+# Create the opengvConfig.cmake file for other cmake projects.
+get_target_property(FULL_LIBRARY_NAME ${PROJECT_NAME} LOCATION)
+set(opengv_LIBRARIES opengv)
+set(opengv_LIBRARY_DIR ${PROJECT_BINARY_DIR} )
+set(opengv_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/opengvConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/opengvConfig.cmake @ONLY IMMEDIATE)
+export(PACKAGE ${PROJECT_NAME})
